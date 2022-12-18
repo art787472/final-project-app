@@ -3,11 +3,11 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-model articles {
+model article {
   id         Int     @id @default(autoincrement())
   zhTitle    String
   enTitle    String?
@@ -22,6 +22,6 @@ model text {
   id        Int       @id @default(autoincrement())
   zh        String?
   en        String?
-  article   articles? @relation(fields: [articleId], references: [id])
+  article   article? @relation(fields: [articleId], references: [id])
   articleId Int?
 }
