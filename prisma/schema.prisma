@@ -1,0 +1,27 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model articles {
+  id         Int     @id @default(autoincrement())
+  zhTitle    String
+  enTitle    String?
+  articleId  String
+  pubdate    String
+  isScrped   Int?
+  sourceLink String?
+  text       text[]
+}
+
+model text {
+  id        Int       @id @default(autoincrement())
+  zh        String?
+  en        String?
+  article   articles? @relation(fields: [articleId], references: [id])
+  articleId Int?
+}
